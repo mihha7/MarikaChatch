@@ -459,7 +459,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     /// プレイヤーのx軸を元に戻すためのメソッド
     func setUpPlayerX() {
                         // プレイヤーのx座標が0より小さくなって画面からはみ出ないようにしたい(bymihha)
-                        if player.position.x < 112 {
+                        if player.position.x < 0 {
                             //player.position = CGPoint(x: 112, y: player.position.y)
                             println("はみでたから戻す！ \(player.position)")
                             player.runAction(SKAction.moveToX(112, duration: 0.2));
@@ -560,4 +560,5 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             })
         }
     }
+    
 }
