@@ -460,8 +460,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func setUpPlayerX() {
                         // プレイヤーのx座標が0より小さくなって画面からはみ出ないようにしたい(bymihha)
                         if player.position.x < 112 {
-                            player.position = CGPoint(x: 112, y: player.position.y)
-                            println("はみでたから戻す！")
+                            //player.position = CGPoint(x: 112, y: player.position.y)
+                            println("はみでたから戻す！ \(player.position)")
+                            player.runAction(SKAction.moveToX(112, duration: 0.2));
                         }
     }
     /// タッチ開始時
@@ -500,7 +501,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func update(currentTime: CFTimeInterval) {
-        /* Called before each frame is rendered */
+        setUpPlayerX()
     }
     
     // MARK: - SKPhysicsContactDelegateプロトコルの実装
@@ -528,7 +529,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 println("あたった")
                 println(player.position)
                 //当たった瞬間にプレイヤーのx座標を元に戻したい…（bymihha）
-             
                 
                 // スコアラベルをアニメーション
                 let scaleUpAnim = SKAction.scaleTo(1.5, duration: 0.1)
@@ -560,5 +560,4 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             })
         }
     }
-    
 }
