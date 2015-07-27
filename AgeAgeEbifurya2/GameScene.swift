@@ -14,8 +14,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     struct Constants {
         /// Player画像
         static let PlayerImages = ["shrimp01", "shrimp02", "shrimp03", "shrimp04"]
-        /// Sweets画像
-        static let SweetsImages = ["M01", "M02", "M03", "M04", "D01", "D02", "D03"]
+
     }
     
     /// 衝突の判定につかうBitMask
@@ -32,8 +31,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         static let None: UInt32   = (1 << 4)
         ///　爆弾
         static let Bakudan: UInt32 = (1 << 5)
-        /// スイーツ
+        /// スイーツ（チョコドーナツ）
         static let Sweets: UInt32 = (1 << 6)
+        /// スイーツ（プレーンドーナツ）
+        static let Sweers2: UInt32 = (1 << 7)
     }
     
     // MARK: - 変数定義
@@ -50,6 +51,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     /// スイーツ（bymihha）
     var sweets: SKNode!
+    
+    var sweets2: SKNode!
     
     /// スコアを表示するラベル
     var scoreLabelNode: SKLabelNode!
@@ -91,6 +94,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.setupCoral()
         // 特典になるスイーツを構築（bymihha）
         self.setupSweets()
+        self.setupSweets2()
         // スコアラベルの構築
         self.setupScoreLabel()
     
@@ -439,6 +443,51 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.runAction(repeatForeverAnim)
     }
     
+    func setupSweets2() {
+        // スイーツ画像を読み込み
+        let donut2 = SKTexture(imageNamed: "D02")
+        donut2.filteringMode = .Linear
+        
+        // 移動する距離を算出
+        let distanceToMove = CGFloat(self.frame.size.width + 2.0 * donut2.size().width)
+        
+        // 画面外まで移動するアニメーションを作成
+        let moveAnim = SKAction.moveByX(-distanceToMove, y: 0.0, duration:NSTimeInterval(distanceToMove / 100.0))
+        // 自身を取り除くアニメーションを作成
+        let removeAnim = SKAction.removeFromParent()
+        // 2つのアニメーションを順に実行するアニメーションを作成
+        let coralAnim = SKAction.sequence([moveAnim, removeAnim])
+        
+        // サンゴを生成するメソッドを呼び出すアニメーションを作成
+        let newCoralAnim = SKAction.runBlock({
+            // サンゴに関するノードを乗せるノードを作成
+            let coral = SKNode()
+            coral.position = CGPoint(x: self.frame.size.width + donut2.size().width * 2, y: 0.0)
+            coral.zPosition = -50.0
+            
+            // 天井から伸びるサンゴを作成
+            let above = SKSpriteNode(texture: donut2)
+            above.position = CGPoint(x: 1.0, y: 60.0 + (above.size.height / 2.0))
+            
+            
+            // サンゴに物理シミュレーションを設定
+            above.physicsBody = SKPhysicsBody(texture: donut2, size: above.size)
+            above.physicsBody?.dynamic = false
+            coral.addChild(above)
+            
+            coral.runAction(coralAnim)
+            
+            self.coralNode.addChild(coral)
+        })
+        // 一定間隔待つアニメーションを作成
+        let delayAnim = SKAction.waitForDuration(2.5)
+        // 上記2つを永遠と繰り返すアニメーションを作成
+        let repeatForeverAnim = SKAction.repeatActionForever(SKAction.sequence([newCoralAnim, delayAnim]))
+        // この画面で実行
+        self.runAction(repeatForeverAnim)
+
+        
+    }
     
     /// スコアラベルを構築
     func setupScoreLabel() {
