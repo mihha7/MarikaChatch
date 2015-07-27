@@ -8,13 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		921820B21B2BF63F00AE3580 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921820B11B2BF63F00AE3580 /* AppDelegate.swift */; };
-		921820B41B2BF63F00AE3580 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 921820B31B2BF63F00AE3580 /* GameScene.sks */; };
 		921820B61B2BF63F00AE3580 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921820B51B2BF63F00AE3580 /* GameScene.swift */; };
 		921820B81B2BF63F00AE3580 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921820B71B2BF63F00AE3580 /* GameViewController.swift */; };
 		921820BB1B2BF63F00AE3580 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 921820B91B2BF63F00AE3580 /* Main.storyboard */; };
-		921820BD1B2BF63F00AE3580 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 921820BC1B2BF63F00AE3580 /* Images.xcassets */; };
 		921820C01B2BF63F00AE3580 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 921820BE1B2BF63F00AE3580 /* LaunchScreen.xib */; };
 		921820CC1B2BF63F00AE3580 /* AgeAgeEbifurya2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921820CB1B2BF63F00AE3580 /* AgeAgeEbifurya2Tests.swift */; };
+		921820D71B2BFBE000AE3580 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 921820D61B2BFBE000AE3580 /* Images.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,15 +30,14 @@
 		921820AC1B2BF63F00AE3580 /* AgeAgeEbifurya2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AgeAgeEbifurya2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		921820B01B2BF63F00AE3580 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		921820B11B2BF63F00AE3580 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		921820B31B2BF63F00AE3580 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		921820B51B2BF63F00AE3580 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		921820B71B2BF63F00AE3580 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		921820BA1B2BF63F00AE3580 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		921820BC1B2BF63F00AE3580 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		921820BF1B2BF63F00AE3580 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		921820C51B2BF63F00AE3580 /* AgeAgeEbifurya2Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AgeAgeEbifurya2Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		921820CA1B2BF63F00AE3580 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		921820CB1B2BF63F00AE3580 /* AgeAgeEbifurya2Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgeAgeEbifurya2Tests.swift; sourceTree = "<group>"; };
+		921820D61B2BFBE000AE3580 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,12 +79,11 @@
 		921820AE1B2BF63F00AE3580 /* AgeAgeEbifurya2 */ = {
 			isa = PBXGroup;
 			children = (
+				921820D61B2BFBE000AE3580 /* Images.xcassets */,
 				921820B11B2BF63F00AE3580 /* AppDelegate.swift */,
-				921820B31B2BF63F00AE3580 /* GameScene.sks */,
 				921820B51B2BF63F00AE3580 /* GameScene.swift */,
 				921820B71B2BF63F00AE3580 /* GameViewController.swift */,
 				921820B91B2BF63F00AE3580 /* Main.storyboard */,
-				921820BC1B2BF63F00AE3580 /* Images.xcassets */,
 				921820BE1B2BF63F00AE3580 /* LaunchScreen.xib */,
 				921820AF1B2BF63F00AE3580 /* Supporting Files */,
 			);
@@ -198,9 +195,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				921820D71B2BFBE000AE3580 /* Images.xcassets in Resources */,
 				921820C01B2BF63F00AE3580 /* LaunchScreen.xib in Resources */,
-				921820BD1B2BF63F00AE3580 /* Images.xcassets in Resources */,
-				921820B41B2BF63F00AE3580 /* GameScene.sks in Resources */,
 				921820BB1B2BF63F00AE3580 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -417,6 +413,7 @@
 				921820D11B2BF63F00AE3580 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		921820D21B2BF63F00AE3580 /* Build configuration list for PBXNativeTarget "AgeAgeEbifurya2Tests" */ = {
 			isa = XCConfigurationList;
@@ -425,6 +422,7 @@
 				921820D41B2BF63F00AE3580 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
