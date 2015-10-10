@@ -197,7 +197,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         land.filteringMode = .Nearest
         
         // 必要な画像枚数を算出
-        var needNumber = 2.0 + (self.frame.size.width / land.size().width)
+        let needNumber = 2.0 + (self.frame.size.width / land.size().width)
         
         // 左に画像一枚分移動アニメーションを作成
         let moveLandAnim = SKAction.moveByX(-land.size().width, y: 0.0, duration:NSTimeInterval(land.size().width / 100.0))
@@ -296,7 +296,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         
         self.addChild(player)
-        println(player.position)
+        print(player.position)
         
     }
     
@@ -335,8 +335,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             under.physicsBody = SKPhysicsBody(texture: coralUnder, size: under.size)
             under.physicsBody?.dynamic = false
             //下のサンゴだけ障害物にしてみる…↓bymihha
-            //under.physicsBody?.categoryBitMask = ColliderType.Bakudan
-            //under.physicsBody?.contactTestBitMask = ColliderType.Player
+            under.physicsBody?.categoryBitMask = ColliderType.Bakudan
+            under.physicsBody?.contactTestBitMask = ColliderType.Player
             coral.addChild(under)
             
             
@@ -363,7 +363,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.runAction(repeatForeverAnim)
     }
 
-    ///  特典になるスイーツを構築する
+    ///  特典になるスイーツを構築する（１つ目：チョコドーナツ）
     func setupSweets() {
 
 //        // スイーツのランダム作成に必要なSKTextureクラスの配列を定義
@@ -443,6 +443,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.runAction(repeatForeverAnim)
     }
     
+    /// 2つ目の特典になるスイーツ（プレーンドーナツ）
     func setupSweets2() {
         // スイーツ画像を読み込み
         let donut2 = SKTexture(imageNamed: "D02")
@@ -510,19 +511,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                         // プレイヤーのx座標が0より小さくなって画面からはみ出ないようにしたい(bymihha)
                         if player.position.x < 0 {
                             //player.position = CGPoint(x: 112, y: player.position.y)
-                            println("はみでたから戻す！ \(player.position)")
-                            player.runAction(SKAction.moveToX(112, duration: 0.2));
+                            print("はみでたから戻す！ \(player.position)")
+                            player.runAction(SKAction.moveToX(112, duration: 0.2))
+                            player.runAction(SKAction.moveToY(0, duration: 0))
                         }
     }
     /// タッチ開始時
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         // ゲーム進行中のとき
         
         if 0.0 < baseNode.speed {
             for touch: AnyObject in touches {
                 let location = touch.locationInNode(self)
                 // プレイヤーに加えられている力をゼロにする
-                player.physicsBody?.velocity = CGVector.zeroVector
+                player.physicsBody?.velocity = CGVector.zero
                 // プレイヤーにy軸方向へ力を加える（x軸方向も加えてみるbymihha）
                 player.physicsBody?.applyImpulse(CGVector(dx: 0.0, dy: 23.0))
                 
@@ -539,7 +541,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             // プレイキャラを再配置
             player.position = CGPoint(x: self.frame.size.width * 0.35, y: self.frame.size.height * 0.6)
-            player.physicsBody?.velocity = CGVector.zeroVector
+            player.physicsBody?.velocity = CGVector.zero
             player.physicsBody?.collisionBitMask = ColliderType.World | ColliderType.Coral | ColliderType.Bakudan
             player.zRotation = 0.0
             
@@ -575,8 +577,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 //触れたドーナツだけを消したい（bymihha）
                 //coralNode.removeFromParent()
                 contact.bodyB.node?.removeFromParent()
-                println("あたった")
-                println(player.position)
+                print("あたった")
+                print(player.position)
                 //当たった瞬間にプレイヤーのx座標を元に戻したい…（bymihha）
                 
                 // スコアラベルをアニメーション
