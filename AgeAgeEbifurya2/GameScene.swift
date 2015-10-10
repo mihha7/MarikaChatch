@@ -323,13 +323,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             coral.position = CGPoint(x: self.frame.size.width + coralUnder.size().width * 2, y: 0.0)
             coral.zPosition = -50.0
             
-            // 地面から伸びるサンゴのy座標を算出（地面からのサンゴを爆弾にしてみる）
+            // 地面から伸びるサンゴ（爆弾）のy座標を算出（地面からのサンゴを爆弾にしてみる）
             let height = UInt32(self.frame.size.height / 6)
-            let y = CGFloat(arc4random_uniform(height * 2) + height)
+            let y = CGFloat(arc4random_uniform(height * 4) + height)
             
-            // 地面から伸びるサンゴを作成（爆弾）
+            // 地面から伸びるサンゴ（爆弾）を作成（爆弾）
             let under = SKSpriteNode(texture: coralUnder)
-            under.position = CGPoint(x: 0.0, y: y)
+            //x座標を100にして、ドーナツと位置をちょっとずらす。（ギモン：x座標もランダムにするには？）
+            under.position = CGPoint(x: 100.0, y: y)
             
             // サンゴに物理シミュレーションを設定（爆弾）
             under.physicsBody = SKPhysicsBody(texture: coralUnder, size: under.size)
@@ -400,16 +401,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // 2つのアニメーションを順に実行するアニメーションを作成
         let coralAnim = SKAction.sequence([moveAnim, removeAnim])
         
-        // サンゴを生成するメソッドを呼び出すアニメーションを作成
+        // サンゴ（ドーナツ）を生成するメソッドを呼び出すアニメーションを作成
         let newCoralAnim = SKAction.runBlock({
-            // サンゴに関するノードを乗せるノードを作成
+            // サンゴ（ドーナツ）に関するノードを乗せるノードを作成
             let coral = SKNode()
             coral.position = CGPoint(x: self.frame.size.width + coralAbove.size().width * 2, y: 0.0)
             coral.zPosition = -50.0
             
-            // 天井から伸びるサンゴを作成
+            // 天井から伸びるサンゴ（ドーナツ）を作成
             let above = SKSpriteNode(texture: coralAbove)
-            above.position = CGPoint(x: 0.0, y: 160.0 + (above.size.height / 2.0))
+            //let donuty = CGFloat(arc4random_uniform(height * 4) + height)
+            // ギモン：ポジションをランダムに決めたい！どうすれば…？
+            above.position = CGPoint(x: 0.0, y: 260.0 + (above.size.height / 2.0))
             
             
             // サンゴに物理シミュレーションを設定
@@ -470,7 +473,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             let above = SKSpriteNode(texture: donut2)
             above.position = CGPoint(x: 1.0, y: 60.0 + (above.size.height / 2.0))
             
-            
             // サンゴに物理シミュレーションを設定
             above.physicsBody = SKPhysicsBody(texture: donut2, size: above.size)
             above.physicsBody?.dynamic = false
@@ -512,8 +514,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                         if player.position.x < 0 {
                             //player.position = CGPoint(x: 112, y: player.position.y)
                             print("はみでたから戻す！ \(player.position)")
-                            player.runAction(SKAction.moveToX(112, duration: 0.2))
-                            player.runAction(SKAction.moveToY(0, duration: 0))
+                            player.runAction(SKAction.moveToX(50, duration: 0.2))
+                            player.runAction(SKAction.moveToY(100, duration: 0))
                         }
     }
     /// タッチ開始時
@@ -527,8 +529,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 player.physicsBody?.velocity = CGVector.zero
                 // プレイヤーにy軸方向へ力を加える（x軸方向も加えてみるbymihha）
                 player.physicsBody?.applyImpulse(CGVector(dx: 0.0, dy: 23.0))
-                
-                
             }
         } else if baseNode.speed == 0.0 && player.speed == 0.0 {
             // ゲームオーバー時はリスタート
